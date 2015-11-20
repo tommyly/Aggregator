@@ -1,6 +1,4 @@
-﻿using System;
-using Aggregator.Services;
-using Microsoft.Owin.Hosting;
+﻿using log4net.Config;
 using Topshelf;
 
 namespace Aggregator
@@ -9,6 +7,8 @@ namespace Aggregator
     {
         static void Main(string[] args)
         {
+            XmlConfigurator.Configure();
+
             HostFactory.Run(x =>                                 
             {
                 x.Service<ErrorAggregationService>(s =>                        
@@ -24,23 +24,6 @@ namespace Aggregator
                 x.SetDisplayName("AppsMonitor.ErrorAggregator");                       
                 x.SetServiceName("AppsMonitor.ErrorAggregator");                        
             });
-        }
-    }
-
-    public class ErrorAggregationService
-    {
-        private IDisposable _apiHost;
-
-        public void Start()
-        {
-            var config = new AggregatorConfiguration();
-
-            _apiHost = WebApp.Start<Startup>(config.AggregatorUrl);
-        }
-
-        public void Stop()
-        {
-            _apiHost.Dispose();
         }
     }
 }

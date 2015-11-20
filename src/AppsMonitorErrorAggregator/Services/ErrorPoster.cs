@@ -1,14 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Reflection;
 using Aggregator.Models;
 using Aggregator.Services.Interfaces;
+using log4net;
 
 namespace Aggregator.Services
 {
     public class ErrorPoster : IErrorPoster
     {
         private readonly IWebClientWrapper _webClientWrapper;
+        public static readonly ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public ErrorPoster(IWebClientWrapper webClientWrapper)
         {
@@ -31,8 +34,9 @@ namespace Aggregator.Services
                 {
                     _webClientWrapper.UploadValues(url, valuesToSend);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Logger.Error($"An error occured whilst posting to the app monitor url {url}", ex);
                 }
             }
         }

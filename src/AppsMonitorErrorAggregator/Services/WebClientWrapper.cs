@@ -10,8 +10,6 @@ namespace Aggregator.Services
         {
             using (var wc = new WebClient())
                 wc.UploadValues(url, values);
-
-            
         }
     }
 }

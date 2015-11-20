@@ -7,7 +7,7 @@ namespace Aggregator.Services
 {
     public class AggregatorConfiguration : IAggregatorConfiguration
     {
-        public IEnumerable<string> AppMonitorUrls { get; private set; }
+        public IEnumerable<string> AppMonitorUrls { get; }
         public string AggregatorUrl { get; private set; }
 
         public AggregatorConfiguration()
