@@ -6,7 +6,7 @@ using Proxy.Services;
 
 namespace Proxy
 {
-    public class ErrorAggregationService
+    public class ErrorProxyService
     {
         private IDisposable _apiHost;
         public static readonly ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
